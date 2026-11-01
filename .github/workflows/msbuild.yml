@@ -8,6 +8,7 @@ name: MSBuild
 on:
   push:
     branches: [ "all-in-one-vs2022-wpo" ]
+  workflow_dispatch:
   pull_request:
     branches: [ "all-in-one-vs2022-wpo" ]
 
