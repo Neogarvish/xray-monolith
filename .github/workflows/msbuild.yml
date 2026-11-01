@@ -141,6 +141,14 @@ jobs:
         
         # A file, directory or wildcard pattern that describes what to upload
         path: ./_build/_game/bin_dbg/*.exe
+
+    - name: Publish to release (artifacts expire on this fork)
+      shell: bash
+      run: |
+        gh release view woz-build -R "$GITHUB_REPOSITORY" >/dev/null 2>&1 || gh release create woz-build -R "$GITHUB_REPOSITORY" --title "WOZ custom exes" --notes "Auto build from woz-912 branch"
+        gh release upload woz-build -R "$GITHUB_REPOSITORY" ./_build/_game/bin_dbg/*.exe --clobber
+      env:
+        GH_TOKEN: ${{ github.token }}
         
         # The desired behavior if no files are found using the provided path. Available Options:
           #  warn: Output a warning but do not fail the action
